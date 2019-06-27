@@ -11,6 +11,7 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {  
+            items: [],
             isEmptyState : true,
             name: '',
             email: '',
@@ -104,7 +105,8 @@ class App extends React.Component {
             number: this.state.number,
             expiration: this.state.expiration,
             billingZipCode: this.state.billingZipCode
-        }
+        };
+
         fetch(serverUrl, {
             method: 'POST',
             body: JSON.stringify(newItem),
@@ -112,21 +114,36 @@ class App extends React.Component {
                 'Content-Type': 'application/json'
             }
         })
-        // .then(this.setState({
-        //     newItem: {},
-        //     name: '',
-        //     email: '',
-        //     password: '',
-        //     line1: "",
-        //     line2: "",
-        //     city: "",
-        //     state: "",
-        //     zipCode: "",
-        //     number: "", 
-        //     expiration: "", 
-        //     billingZipCode: ""
-        // })).then()
+        .then(this.setState({
+            newItem: {},
+            name: '',
+            email: '',
+            password: '',
+            line1: "",
+            line2: "",
+            city: "",
+            state: "",
+            zipCode: "",
+            number: "", 
+            expiration: "", 
+            billingZipCode: ""
+        })).then(() => this.getInfo)
     };
+
+    componentDidMount() {
+        this.getInfo()
+    };
+
+    getInfo() {
+        fetch(serverUrl, {
+            method: 'GET'
+        })
+        .then((data) => data.json())
+        .then((data) => this.setState({
+            'items': data
+        }))
+        .then(() => console.log(this.state.items))   
+    }
 
     render () {
         return(
@@ -142,5 +159,6 @@ class App extends React.Component {
     };
 };
 
+//
 
 export default App;
