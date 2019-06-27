@@ -10,13 +10,16 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/', (req, res) => {
-    //console.log('posting')
-    console.log(req.body);
-    // let item = req.body
-    // db.connection.query(`INSERT INTO checkout () values `)
-})
+    let item = req.body;
+    db.connection.query(`INSERT INTO information (TheName, email, ThePassword, line1, line2, city, TheState, zipCode, TheNumber, expiration, billingZipCode ) values ('${item.name}', '${item.email}', '${item.password}', '${item.line1}', '${item.line2}', '${item.city}', '${item.state}', ${item.zipCode}, ${item.number}, ${item.expiration}, ${item.billingZipCode})`, (err, data) => {
+        if(err){
+            res.status(500).send();
+        } else {
+            res.status(200).send()
+        }
+    });
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
 
-// db.connection.query(`INSERT INTO groceries (itemName, itemQuantity) values ('${grocery.inputName}', ${grocery.inputQuantity})`, (err, data) => {
