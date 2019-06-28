@@ -5,7 +5,7 @@ import FormTwo from "./FormTwo.jsx";
 import FormThree from "./FormThree.jsx";
 import Purchase from "./Purchase.jsx";
 
-const serverUrl = 'http://localhost:3000/';
+const serverUrl = 'http://localhost:5555/';
 
 class App extends React.Component {
     constructor(props){
@@ -31,6 +31,8 @@ class App extends React.Component {
         this.triggerFormThree = this.triggerFormThree.bind(this); 
         this.triggerPurchase = this.triggerPurchase.bind(this); 
         this.sendInfo = this.sendInfo.bind(this); 
+        this.getInfo = this.getInfo.bind(this); 
+
     };
 
     triggerCheckout() {
@@ -145,7 +147,7 @@ class App extends React.Component {
         .then((data) => this.setState({
             'items': data
         }))
-        .then(() => console.log(this.state.items[this.state.items.length - 1]))   
+        .then(() => console.log(this.state.items))   
     }
 
     render () {
@@ -155,7 +157,7 @@ class App extends React.Component {
             {this.state.addCheckoutState && <FormOne toFormTwo={this.triggerFormOne}/>}
             {this.state.addFormOneState && <FormTwo toFormThree={this.triggerFormTwo}/>}
             {this.state.addFormTwoState && <FormThree purchase={this.triggerFormThree}/>}
-            {this.state.addFormThreeState && <Purchase items={this.state.items[this.state.items.length - 1]} toHomePage={this.triggerPurchase} />}
+            {this.state.addFormThreeState && <Purchase items={this.state.items} toHomePage={this.triggerPurchase} />}
             {this.state.addPurchaseState && <CheckOut/>}
         </div>
         )
