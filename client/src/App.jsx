@@ -115,20 +115,21 @@ class App extends React.Component {
                 'Content-Type': 'application/json'
             }
         })
-        .then(this.setState({
-            newItem: {},
-            name: '',
-            email: '',
-            password: '',
-            line1: "",
-            line2: "",
-            city: "",
-            state: "",
-            zipCode: "",
-            number: "", 
-            expiration: "", 
-            billingZipCode: ""
-        })).then(() => this.getInfo)
+        // .then(this.setState({
+        //     newItem: {},
+        //     name: '',
+        //     email: '',
+        //     password: '',
+        //     line1: "",
+        //     line2: "",
+        //     city: "",
+        //     state: "",
+        //     zipCode: "",
+        //     number: "", 
+        //     expiration: "", 
+        //     billingZipCode: ""
+        // }))
+        .then(() => this.getInfo)
     };
 
     componentDidMount() {
@@ -144,7 +145,7 @@ class App extends React.Component {
         .then((data) => this.setState({
             'items': data
         }))
-        .then(() => console.log(this.state.items))   
+        .then(() => console.log(this.state.items[this.state.items.length - 1]))   
     }
 
     render () {
@@ -154,7 +155,7 @@ class App extends React.Component {
             {this.state.addCheckoutState && <FormOne toFormTwo={this.triggerFormOne}/>}
             {this.state.addFormOneState && <FormTwo toFormThree={this.triggerFormTwo}/>}
             {this.state.addFormTwoState && <FormThree purchase={this.triggerFormThree}/>}
-            {this.state.addFormThreeState && <Purchase items={this.state.items} toHomePage={this.triggerPurchase} />}
+            {this.state.addFormThreeState && <Purchase items={this.state.items[this.state.items.length - 1]} toHomePage={this.triggerPurchase} />}
             {this.state.addPurchaseState && <CheckOut/>}
         </div>
         )
