@@ -29,7 +29,7 @@ class FormThree extends React.Component {
     };
 
     passData() {
-        this.props.purchase(this.state)
+        this.props.purchase(this.state);
     };
 
     render () {

@@ -22,6 +22,7 @@ app.post('/', (req, res) => {
 });
 
 app.get('/', (req, res) => {
+    console.log(req.body);
     db.connection.query('SELECT * FROM information', (err, data) => {
         if(err){
             res.status(500).send();

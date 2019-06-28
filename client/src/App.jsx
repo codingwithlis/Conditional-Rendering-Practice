@@ -90,6 +90,7 @@ class App extends React.Component {
             addPurchaseState: true
         })
         this.sendInfo();
+        this.getInfo();
     };
 
     sendInfo() {
@@ -131,7 +132,8 @@ class App extends React.Component {
     };
 
     componentDidMount() {
-        this.getInfo()
+        this.sendInfo();
+        this.getInfo();
     };
 
     getInfo() {
@@ -152,13 +154,11 @@ class App extends React.Component {
             {this.state.addCheckoutState && <FormOne toFormTwo={this.triggerFormOne}/>}
             {this.state.addFormOneState && <FormTwo toFormThree={this.triggerFormTwo}/>}
             {this.state.addFormTwoState && <FormThree purchase={this.triggerFormThree}/>}
-            {this.state.addFormThreeState && <Purchase toHomePage={this.triggerPurchase} />}
+            {this.state.addFormThreeState && <Purchase items={this.state.items} toHomePage={this.triggerPurchase} />}
             {this.state.addPurchaseState && <CheckOut/>}
         </div>
         )
     };
 };
-
-//
 
 export default App;
