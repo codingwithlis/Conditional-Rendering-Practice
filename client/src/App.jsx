@@ -30,9 +30,7 @@ class App extends React.Component {
         this.triggerFormTwo = this.triggerFormTwo.bind(this); 
         this.triggerFormThree = this.triggerFormThree.bind(this); 
         this.triggerPurchase = this.triggerPurchase.bind(this); 
-        this.sendInfo = this.sendInfo.bind(this); 
-        this.getInfo = this.getInfo.bind(this); 
-
+        this.getInfo = this.getInfo.bind(this)
     };
 
     triggerCheckout() {
@@ -116,27 +114,11 @@ class App extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-        // .then(this.setState({
-        //     newItem: {},
-        //     name: '',
-        //     email: '',
-        //     password: '',
-        //     line1: "",
-        //     line2: "",
-        //     city: "",
-        //     state: "",
-        //     zipCode: "",
-        //     number: "", 
-        //     expiration: "", 
-        //     billingZipCode: ""
-        // }))
-        .then(() => this.getInfo)
+        }).then(() => this.getInfo)
     };
 
     componentDidMount() {
-        this.sendInfo();
-        this.getInfo();
+        this.getInfo()
     };
 
     getInfo() {
@@ -145,7 +127,7 @@ class App extends React.Component {
         })
         .then((data) => data.json())
         .then((data) => this.setState({
-            'items': data
+            'items': [data[data.length -1]]
         }))
         .then(() => console.log(this.state.items))   
     }
